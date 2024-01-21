@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FreshMarket.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(FreshMarketDbContext))]
-    partial class SupermarketUzDbContextModelSnapshot : ModelSnapshot
+    partial class FreshMarketDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

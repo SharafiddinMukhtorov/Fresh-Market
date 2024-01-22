@@ -4,8 +4,8 @@ using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
 using FreshMarket.Infrastructure.Persistence;
-using FreshMarket.Pagination.PaginatedList;
 using FreshMarket.Pagination;
+using FreshMarket.Pagination.PaginatedList;
 using Microsoft.Extensions.Logging;
 using System.Data.Common;
 
@@ -47,8 +47,7 @@ namespace FreshMarket.Services
                 }
             }
 
-            // var sales = query.ToPaginatedList(saleResourceParameters.PageSize, saleResourceParameters.PageNumber);
-            var sales = query.ToList();
+            var sales = query.ToPaginatedList(saleResourceParameters.PageSize, saleResourceParameters.PageNumber);
 
             var salesDto = _mapper.Map<List<SaleDto>>(sales);
 

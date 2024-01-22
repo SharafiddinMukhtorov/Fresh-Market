@@ -1,4 +1,8 @@
 
+using FreshMarket.Extensions;
+using Microsoft.AspNetCore.StaticFiles;
+using Serilog;
+
 namespace Fresh_Market
 {
     public class Program
@@ -7,12 +11,16 @@ namespace Fresh_Market
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            builder.Host.UseSerilog();
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
+            builder.Services.ConfigureLogger();
+            builder.Services.ConfigureRepositories();
+            builder.Services.ConfigureServices();
+            builder.Services.ConfigureDatabaseContext();
 
             var app = builder.Build();
 

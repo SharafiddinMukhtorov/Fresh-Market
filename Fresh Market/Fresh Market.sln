@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreshMarket.Domain", "Fresh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreshMarket.Infrastructure", "FreshMarket.Infrastructure\FreshMarket.Infrastructure.csproj", "{36E2B124-ABD9-4DB2-A470-C21EFBEF2DF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FreshMarket.Service", "FreshMarket.Service\FreshMarket.Service.csproj", "{5A1C225B-893C-40D6-B512-D2742E84E2DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{36E2B124-ABD9-4DB2-A470-C21EFBEF2DF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36E2B124-ABD9-4DB2-A470-C21EFBEF2DF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36E2B124-ABD9-4DB2-A470-C21EFBEF2DF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1C225B-893C-40D6-B512-D2742E84E2DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1C225B-893C-40D6-B512-D2742E84E2DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1C225B-893C-40D6-B512-D2742E84E2DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1C225B-893C-40D6-B512-D2742E84E2DA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

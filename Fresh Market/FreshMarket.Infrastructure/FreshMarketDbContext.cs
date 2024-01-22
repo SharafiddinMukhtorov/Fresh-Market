@@ -18,11 +18,9 @@ namespace FreshMarket.Infrastructure.Persistence
         public virtual DbSet<Supply> Supplies { get; set; }
         public virtual DbSet<SupplyItem> SupplyItems { get; set; }
 
-        public FreshMarketDbContext(DbContextOptions<FreshMarketDbContext> options,
-            LongQueryInterceptor longQueryInterceptor)
-            : base(options)
+        public FreshMarketDbContext(DbContextOptions<FreshMarketDbContext> options)
+               : base(options)
         {
-            _longQueryInterceptor = longQueryInterceptor;
             Database.Migrate();
         }
 

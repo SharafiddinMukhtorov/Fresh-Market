@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
-using FreshMarket.Domain.DTOs.SaleItem;
-using FreshMarket.Domain.DTOs.Supplier;
 using FreshMarket.Domain.DTOs.SupplyItem;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
 using FreshMarket.Infrastructure.Persistence;
-using FreshMarket.Pagination.PaginatedList;
 using FreshMarket.Pagination;
+using FreshMarket.Pagination.PaginatedList;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
 namespace FreshMarket.Services
 {

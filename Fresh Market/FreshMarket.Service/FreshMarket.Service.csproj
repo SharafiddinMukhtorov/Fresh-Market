@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="8.0.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Text.Json" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FreshMarket.Domain\FreshMarket.Domain.csproj" />
+    <ProjectReference Include="..\FreshMarket.Infrastructure\FreshMarket.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

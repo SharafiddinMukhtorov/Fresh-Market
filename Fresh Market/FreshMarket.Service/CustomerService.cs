@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using FreshMarket.Domain.DTOs.Category;
 using FreshMarket.Domain.DTOs.Customer;
-using FreshMarket.Domain.DTOs.Product;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
@@ -9,7 +7,6 @@ using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
 namespace FreshMarket.Services
 {

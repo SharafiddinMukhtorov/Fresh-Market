@@ -1,21 +1,12 @@
 ﻿using AutoMapper;
-using FreshMarket.Domain.DTOs.Product;
-using FreshMarket.Domain.DTOs.Sale;
 using FreshMarket.Domain.DTOs.Supplier;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
-using FreshMarket.Infrastructure.Persistence;
-using FreshMarket.Pagination.PaginatedList;
-using FreshMarket.Pagination;
-using FreshMarket.ResourceParameters;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FreshMarket.Domain.ResourceParameters;
+using FreshMarket.Infrastructure.Persistence;
+using FreshMarket.Pagination;
+using FreshMarket.Pagination.PaginatedList;
+using Microsoft.Extensions.Logging;
 
 namespace FreshMarket.Services
 {

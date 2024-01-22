@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
 using FreshMarket.Domain.DTOs.Category;
-using FreshMarket.Domain.DTOs.Product;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Exceptions;
-using FreshMarket.Domain.Interfaces.Repositories;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
 using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
-using FreshMarket.ResourceParameters;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
 namespace FreshMarket.Services
 {
@@ -93,7 +89,7 @@ namespace FreshMarket.Services
         public void DeleteCategory(int id)
         {
             var category = _context.Categories.FirstOrDefault(x => x.Id == id);
-            
+
             if (category is not null)
             {
                 _context.Categories.Remove(category);

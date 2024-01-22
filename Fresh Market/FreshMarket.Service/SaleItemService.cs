@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using FreshMarket.Domain.DTOs.Product;
-using FreshMarket.Domain.DTOs.Sale;
 using FreshMarket.Domain.DTOs.SaleItem;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
@@ -8,14 +6,7 @@ using FreshMarket.Domain.ResourceParameters;
 using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
-using FreshMarket.ResourceParameters;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FreshMarket.Services
 {
@@ -98,7 +89,7 @@ namespace FreshMarket.Services
             }
 
             var saleitems = query.ToPaginatedList(saleItemResourceParameters.PageSize, saleItemResourceParameters.PageNumber);
-            //var saleItems = query.ToList();
+
             var saleitemDto = _mapper.Map<List<SaleItemDto>>(saleitems);
 
             return new PaginatedList<SaleItemDto>(saleitemDto, saleitems.TotalCount, saleitems.CurrentPage, saleitems.PageSize);

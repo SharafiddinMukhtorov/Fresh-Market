@@ -7,7 +7,6 @@ using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
 using FreshMarket.ResourceParameters;
 using Microsoft.Extensions.Logging;
-using System.Data.Common;
 
 namespace FreshMarket.Services
 {
@@ -23,7 +22,7 @@ namespace FreshMarket.Services
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
-        
+
         public PaginatedList<ProductDto> GetProducts(ProductResourceParameters productResourceParameters)
         {
             var query = _context.Products.AsQueryable();
@@ -96,8 +95,8 @@ namespace FreshMarket.Services
             _context.Products.Add(productEntity);
             _context.SaveChanges();
 
-            var productDto = _mapper.Map<ProductDto>(productEntity);   
-            
+            var productDto = _mapper.Map<ProductDto>(productEntity);
+
 
             return productDto;
         }

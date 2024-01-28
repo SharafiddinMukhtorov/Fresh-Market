@@ -8,7 +8,7 @@ namespace FreshMarket.Domain.ResourceParameters
 {
     public class ResourceParametersBase
     {
-        public virtual int MaxPageSize { get; set; } = 25;
+        public virtual int MaxPageSize { get; set; } = 105;
 
         public virtual string? SearchString { get; set; }
         public int PageNumber { get; set; } = 1;

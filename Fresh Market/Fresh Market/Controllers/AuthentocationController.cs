@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fresh_Market.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -8,11 +9,6 @@ namespace FreshMarket.Controllers
 {
     [Route("auth")]
     [ApiController]
-    public class LoginRequest
-    {
-        public string Login { get; set; }
-        public string Password { get; set; }
-    }
     public class AuthentocationController : ControllerBase
     {
 
@@ -26,12 +22,12 @@ namespace FreshMarket.Controllers
                 return Unauthorized();
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("login sharafiddin_m"));
+            var securityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("login sharafiddin_m_secret_key1234"));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claimsForToken = new List<Claim>();
-            claimsForToken.Add(new Claim("sub", user.Phone));
-            claimsForToken.Add(new Claim("name", user.Name));
+            claimsForToken.Add(new Claim("sub", user?.Phone ?? "phone"));
+            claimsForToken.Add(new Claim("name", user?.Name ?? "admin"));
 
             var jwtSecurityToken = new JwtSecurityToken(
                 "MarketUz-api", 

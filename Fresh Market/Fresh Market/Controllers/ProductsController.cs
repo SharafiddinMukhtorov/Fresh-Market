@@ -1,18 +1,10 @@
-﻿using AutoMapper;
-using FreshMarket.Domain.DTOs.Category;
-using FreshMarket.Domain.DTOs.Customer;
-using FreshMarket.Domain.DTOs.Product;
-using FreshMarket.Domain.Entities;
+﻿using FreshMarket.Domain.DTOs.Product;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.Pagination;
 using FreshMarket.Pagination.PaginatedList;
 using FreshMarket.ResourceParameters;
-using FreshMarket.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,7 +13,7 @@ namespace FreshMarketApi.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    [Authorize]
+    // [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -41,7 +33,7 @@ namespace FreshMarketApi.Controllers
 
             var metaData = GetPaginationMetaData(products);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(products);
         }

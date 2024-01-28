@@ -1,7 +1,4 @@
-﻿using FreshMarket.Domain.DTOs.Product;
-using FreshMarket.Domain.DTOs.Supplier;
-using FreshMarket.Domain.DTOs.Supply;
-using FreshMarket.Domain.Entities;
+﻿using FreshMarket.Domain.DTOs.Supply;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.Pagination;
 using FreshMarket.Domain.ResourceParameters;
@@ -16,7 +13,7 @@ namespace FreshMarket.Controllers
     [ApiController]
     [Authorize]
     public class SuppliesController : Controller
-    {      
+    {
         private readonly ISupplyService _supplyService;
         public SuppliesController(ISupplyService supplyService)
         {
@@ -30,7 +27,7 @@ namespace FreshMarket.Controllers
 
             var metaData = GetPaginationMetaData(supplies);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(supplies);
         }

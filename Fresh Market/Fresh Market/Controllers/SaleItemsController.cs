@@ -1,6 +1,4 @@
-﻿using FreshMarket.Domain.DTOs.Category;
-using FreshMarket.Domain.DTOs.Sale;
-using FreshMarket.Domain.DTOs.SaleItem;
+﻿using FreshMarket.Domain.DTOs.SaleItem;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.Pagination;
 using FreshMarket.Domain.ResourceParameters;
@@ -68,7 +66,7 @@ namespace FreshMarket.Controllers
         }
         private PaginationMetaData GetPaginationMetaData(PaginatedList<SaleItemDto> categoryDtOs)
         {
-            return new PaginationMetaData   
+            return new PaginationMetaData
             {
                 Totalcount = categoryDtOs.TotalCount,
                 PageSize = categoryDtOs.PageSize,

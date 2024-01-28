@@ -1,7 +1,9 @@
 
 using FreshMarket.Extensions;
 using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System.Text;
 
 namespace Fresh_Market
 {
@@ -21,6 +23,17 @@ namespace Fresh_Market
             builder.Services.ConfigureRepositories();
             builder.Services.ConfigureServices();
             builder.Services.ConfigureDatabaseContext();
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            builder.Services.AddAuthentication("Bearer")
+           .AddJwtBearer(options => options.TokenValidationParameters = new()
+           {
+               ValidateIssuer = true,
+               ValidateAudience = true,
+               ValidateIssuerSigningKey = true,
+               ValidIssuer = "MarketUz-api",
+               ValidAudience = "MarketUz",
+               IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("login sharafiddin_m_secret_key1234"))
+           });
 
             var app = builder.Build();
 
@@ -33,8 +46,9 @@ namespace Fresh_Market
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            // app.UseAuthorization();
 
+            app.UseAuthentication();
 
             app.MapControllers();
 

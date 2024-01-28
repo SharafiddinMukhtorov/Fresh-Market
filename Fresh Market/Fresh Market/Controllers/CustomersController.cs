@@ -1,11 +1,8 @@
-﻿using FreshMarket.Domain.DTOs.Category;
-using FreshMarket.Domain.DTOs.Customer;
+﻿using FreshMarket.Domain.DTOs.Customer;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.Pagination;
 using FreshMarket.Domain.ResourceParameters;
 using FreshMarket.Pagination.PaginatedList;
-using FreshMarket.Services;
-using FreshMarketApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -31,7 +28,7 @@ namespace FreshMarket.Controllers
 
             var metaData = GetPaginationMetaData(customers);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(customers);
         }

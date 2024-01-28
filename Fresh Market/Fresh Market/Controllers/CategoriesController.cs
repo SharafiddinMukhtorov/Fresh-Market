@@ -32,7 +32,7 @@ namespace FreshMarketApi.Controllers
 
             var metaData = GetPaginationMetaData(categories);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(categories);
         }

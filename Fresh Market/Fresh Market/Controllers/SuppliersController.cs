@@ -1,7 +1,4 @@
-﻿using FreshMarket.Domain.DTOs.Product;
-using FreshMarket.Domain.DTOs.Sale;
-using FreshMarket.Domain.DTOs.Supplier;
-using FreshMarket.Domain.Entities;
+﻿using FreshMarket.Domain.DTOs.Supplier;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.Pagination;
 using FreshMarket.Domain.ResourceParameters;
@@ -30,7 +27,7 @@ namespace FreshMarket.Controllers
 
             var metaData = GetPaginationMetaData(suppliers);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(suppliers);
         }

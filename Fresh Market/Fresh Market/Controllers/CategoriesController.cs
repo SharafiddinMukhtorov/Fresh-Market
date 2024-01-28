@@ -13,7 +13,7 @@ namespace FreshMarketApi.Controllers
 {
     [Route("api/categories")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -29,10 +29,6 @@ namespace FreshMarketApi.Controllers
         public ActionResult<IEnumerable<CategoryDto>> Get([FromQuery] CategoryResourceParameters categoryResourceParameters)
         {
             var categories = _categoryService.GetCategories(categoryResourceParameters);
-
-            var metaData = GetPaginationMetaData(categories);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(categories);
         }
@@ -77,16 +73,6 @@ namespace FreshMarketApi.Controllers
             _categoryService.DeleteCategory(id);
 
             return NoContent();
-        }
-        private PaginationMetaData GetPaginationMetaData(PaginatedList<CategoryDto> categoryDtOs)
-        {
-            return new PaginationMetaData
-            {
-                Totalcount = categoryDtOs.TotalCount,
-                PageSize = categoryDtOs.PageSize,
-                CurrentPage = categoryDtOs.CurrentPage,
-                TotalPages = categoryDtOs.TotalPage,
-            };
         }
     }
 }

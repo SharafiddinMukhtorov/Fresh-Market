@@ -25,11 +25,6 @@ namespace FreshMarket.Controllers
         {
             var saleItems = _saleItemService.GetSaleItems(saleItemResourceParameters);
 
-            var metaData = GetPaginationMetaData(saleItems);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
-
-
             return Ok(saleItems);
         }
 
@@ -63,16 +58,6 @@ namespace FreshMarket.Controllers
             _saleItemService.DeleteSaleItem(id);
 
             return NoContent();
-        }
-        private PaginationMetaData GetPaginationMetaData(PaginatedList<SaleItemDto> categoryDtOs)
-        {
-            return new PaginationMetaData
-            {
-                Totalcount = categoryDtOs.TotalCount,
-                PageSize = categoryDtOs.PageSize,
-                CurrentPage = categoryDtOs.CurrentPage,
-                TotalPages = categoryDtOs.TotalPage,
-            };
         }
     }
 }

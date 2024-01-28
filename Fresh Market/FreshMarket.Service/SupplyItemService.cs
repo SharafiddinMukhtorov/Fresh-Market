@@ -3,6 +3,7 @@ using FreshMarket.Domain.DTOs.SupplyItem;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
+using FreshMarket.Domain.Responses;
 using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
@@ -23,7 +24,7 @@ namespace FreshMarket.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public PaginatedList<SupplyItemDto> GetSupplyItems(SupplyItemResourceParameters supplyItemResourceParameters)
+        public GetSupplyItemsResponse GetSupplyItems(SupplyItemResourceParameters supplyItemResourceParameters)
         {
             var query = _context.SupplyItems.AsQueryable();
 
@@ -92,7 +93,18 @@ namespace FreshMarket.Services
 
             var supplyItemDto = _mapper.Map<List<SupplyItemDto>>(supplyItems);
 
-            return new PaginatedList<SupplyItemDto>(supplyItemDto, supplyItems.TotalCount, supplyItems.CurrentPage, supplyItems.PageSize);
+            var paginatedResult = new PaginatedList<SupplyItemDto>(supplyItemDto, supplyItems.TotalCount, supplyItems.CurrentPage, supplyItems.PageSize);
+
+            var result = new GetSupplyItemsResponse()
+            {
+                Data = paginatedResult.ToList(),
+                HasNextPage = paginatedResult.NextPage,
+                HasPreviousPage = paginatedResult.PreviosPage,
+                PageNumber = paginatedResult.CurrentPage,
+                PageSize = paginatedResult.PageSize,
+                TotalPages = paginatedResult.TotalPage
+            };
+            return result;
         }
 
         public SupplyItemDto? GetSupplyItemById(int id)

@@ -50,6 +50,8 @@ namespace Fresh_Market
 
             app.UseAuthentication();
 
+            app.UseAuthorization();
+
             app.MapControllers();
 
             app.Run();

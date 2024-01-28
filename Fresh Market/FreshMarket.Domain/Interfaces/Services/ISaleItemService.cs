@@ -1,6 +1,7 @@
 ﻿using FreshMarket.Domain.DTOs.Category;
 using FreshMarket.Domain.DTOs.SaleItem;
 using FreshMarket.Domain.ResourceParameters;
+using FreshMarket.Domain.Responses;
 using FreshMarket.Pagination.PaginatedList;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace FreshMarket.Domain.Interfaces.Services
 {
     public interface ISaleItemService
     {
-        PaginatedList<SaleItemDto> GetSaleItems(SaleItemResourceParameters saleItemResourceParameters);
+        GetSaleItemsResponse GetSaleItems(SaleItemResourceParameters saleItemResourceParameters);
         SaleItemDto? GetSaleItemById(int id);
         SaleItemDto CreateSaleItem(SaleItemForCreateDto saleItemToCreate);
         void UpdateSaleItem(SaleItemForUpdateDto saleItemToUpdate);

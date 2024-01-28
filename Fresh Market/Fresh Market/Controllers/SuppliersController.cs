@@ -25,10 +25,6 @@ namespace FreshMarket.Controllers
         {
             var suppliers = _supplierService.GetSuppliers(supplierResourceParameters);
 
-            var metaData = GetPaginationMetaData(suppliers);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
-
             return Ok(suppliers);
         }
 
@@ -62,16 +58,6 @@ namespace FreshMarket.Controllers
             _supplierService.DeleteSupplier(id);
 
             return NoContent();
-        }
-        private PaginationMetaData GetPaginationMetaData(PaginatedList<SupplierDto> supplierDtOs)
-        {
-            return new PaginationMetaData
-            {
-                Totalcount = supplierDtOs.TotalCount,
-                PageSize = supplierDtOs.PageSize,
-                CurrentPage = supplierDtOs.CurrentPage,
-                TotalPages = supplierDtOs.TotalPage,
-            };
         }
     }
 }

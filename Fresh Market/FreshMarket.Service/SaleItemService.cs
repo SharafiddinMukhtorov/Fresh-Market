@@ -3,6 +3,7 @@ using FreshMarket.Domain.DTOs.SaleItem;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
+using FreshMarket.Domain.Responses;
 using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
@@ -23,7 +24,7 @@ namespace FreshMarket.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public PaginatedList<SaleItemDto> GetSaleItems(SaleItemResourceParameters saleItemResourceParameters)
+        public GetSaleItemsResponse GetSaleItems(SaleItemResourceParameters saleItemResourceParameters)
         {
             var query = _context.SaleItems.AsQueryable();
 
@@ -92,7 +93,18 @@ namespace FreshMarket.Services
 
             var saleitemDto = _mapper.Map<List<SaleItemDto>>(saleitems);
 
-            return new PaginatedList<SaleItemDto>(saleitemDto, saleitems.TotalCount, saleitems.CurrentPage, saleitems.PageSize);
+            var paginatedResult = new PaginatedList<SaleItemDto>(saleitemDto, saleitems.TotalCount, saleitems.CurrentPage, saleitems.PageSize);
+
+            var result = new GetSaleItemsResponse()
+            {
+                Data = paginatedResult.ToList(),
+                HasNextPage = paginatedResult.NextPage,
+                HasPreviousPage = paginatedResult.PreviosPage,
+                PageNumber = paginatedResult.CurrentPage,
+                PageSize = paginatedResult.PageSize,
+                TotalPages = paginatedResult.TotalPage
+            };
+            return result;
         }
 
         public SaleItemDto? GetSaleItemById(int id)

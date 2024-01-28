@@ -1,8 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Collections.Immutable;
-using System.Runtime.CompilerServices;
-
-namespace FreshMarket.Pagination.PaginatedList
+﻿namespace FreshMarket.Pagination.PaginatedList
 {
     public class PaginatedList<T> : List<T>
     {

@@ -34,7 +34,7 @@ namespace FreshMarket.Controllers
                 "MarketUz", 
                 claimsForToken, 
                 DateTime.UtcNow, 
-                DateTime.UtcNow.AddMinutes(2), 
+                DateTime.UtcNow.AddHours(2), 
                 signingCredentials);
 
             var token = new JwtSecurityTokenHandler()

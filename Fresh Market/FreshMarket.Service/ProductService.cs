@@ -2,6 +2,7 @@
 using FreshMarket.Domain.DTOs.Product;
 using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Interfaces.Services;
+using FreshMarket.Domain.Responses;
 using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
@@ -23,7 +24,7 @@ namespace FreshMarket.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public PaginatedList<ProductDto> GetProducts(ProductResourceParameters productResourceParameters)
+        public GetProductsResponse GetProducts(ProductResourceParameters productResourceParameters)
         {
             var query = _context.Products.AsQueryable();
 
@@ -75,7 +76,18 @@ namespace FreshMarket.Services
 
             var productDtos = _mapper.Map<List<ProductDto>>(products);
 
-            return new PaginatedList<ProductDto>(productDtos, products.TotalCount, products.CurrentPage, products.PageSize);
+            var paginatedResult =  new PaginatedList<ProductDto>(productDtos, products.TotalCount, products.CurrentPage, products.PageSize);
+
+            var result = new GetProductsResponse()
+            {
+                Data = paginatedResult.ToList(),
+                HasNextPage = paginatedResult.NextPage,
+                HasPreviousPage = paginatedResult.PreviosPage,
+                PageNumber = paginatedResult.CurrentPage,
+                PageSize = paginatedResult.PageSize,
+                TotalPages = paginatedResult.TotalPage
+            };
+            return result;
         }
 
         public ProductDto? GetProductById(int id)

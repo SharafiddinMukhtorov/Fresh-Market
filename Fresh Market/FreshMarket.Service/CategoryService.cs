@@ -4,6 +4,7 @@ using FreshMarket.Domain.Entities;
 using FreshMarket.Domain.Exceptions;
 using FreshMarket.Domain.Interfaces.Services;
 using FreshMarket.Domain.ResourceParameters;
+using FreshMarket.Domain.Responses;
 using FreshMarket.Infrastructure.Persistence;
 using FreshMarket.Pagination;
 using FreshMarket.Pagination.PaginatedList;
@@ -26,7 +27,7 @@ namespace FreshMarket.Services
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        public PaginatedList<CategoryDto> GetCategories(CategoryResourceParameters categoryResourceParameters)
+        public GetCategoriesResponse GetCategories(CategoryResourceParameters categoryResourceParameters)
         {
             var query = _context.Categories.AsQueryable();
 
@@ -48,7 +49,18 @@ namespace FreshMarket.Services
 
             var categoriesDto = _mapper.Map<List<CategoryDto>>(categories);
 
-            return new PaginatedList<CategoryDto>(categoriesDto, categories.TotalCount, categories.CurrentPage, categories.PageSize);
+            var paginatedResult = new PaginatedList<CategoryDto>(categoriesDto, categories.TotalCount, categories.CurrentPage, categories.PageSize);
+
+            var result = new GetCategoriesResponse()
+            {
+                Data = paginatedResult.ToList(),
+                HasNextPage = paginatedResult.NextPage,
+                HasPreviousPage = paginatedResult.PreviosPage,
+                PageNumber = paginatedResult.CurrentPage,
+                PageSize = paginatedResult.PageSize,
+                TotalPages = paginatedResult.TotalPage
+            };
+            return result;
         }
 
         public CategoryDto? GetCategoryById(int id)

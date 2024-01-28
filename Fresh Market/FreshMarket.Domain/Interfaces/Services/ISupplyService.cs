@@ -1,6 +1,7 @@
 ﻿using FreshMarket.Domain.DTOs.Category;
 using FreshMarket.Domain.DTOs.Supply;
 using FreshMarket.Domain.ResourceParameters;
+using FreshMarket.Domain.Responses;
 using FreshMarket.Pagination.PaginatedList;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace FreshMarket.Domain.Interfaces.Services
 {
     public interface ISupplyService
     {
-        PaginatedList<SupplyDto> GetSupplies(SupplyResourceParameters supplyResourceParameters);
+        GetSuppliesResponse GetSupplies(SupplyResourceParameters supplyResourceParameters);
         SupplyDto? GetSupplyById(int id);
         SupplyDto CreateSupply(SupplyForCreateDto supplyToCreate);
         void UpdateSupply(SupplyForUpdateDto supplyToUpdate);

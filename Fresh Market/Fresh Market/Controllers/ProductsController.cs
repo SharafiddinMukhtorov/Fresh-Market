@@ -13,7 +13,7 @@ namespace FreshMarketApi.Controllers
 {
     [Route("api/products")]
     [ApiController]
-    // [Authorize]
+    [Authorize]
     public class ProductsController : ControllerBase
     {
         private readonly IProductService _productService;
@@ -30,15 +30,9 @@ namespace FreshMarketApi.Controllers
         {
             var products = _productService.GetProducts(productResourceParameters);
 
-
-            var metaData = GetPaginationMetaData(products);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
-
             return Ok(products);
         }
 
-        // GET api/<ProductsController>/5
         [HttpGet("{id}", Name = "GetProductById")]
         public ActionResult<ProductDto> Get(int id)
         {
@@ -46,8 +40,6 @@ namespace FreshMarketApi.Controllers
 
             return Ok(product);
         }
-
-        // POST api/<ProductsController>
         [HttpPost]
         public ActionResult Post([FromBody] ProductForCreateDto product)
         {
@@ -55,8 +47,6 @@ namespace FreshMarketApi.Controllers
 
             return StatusCode(201);
         }
-
-        // PUT api/<ProductsController>/5
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ProductForUpdateDto product)
         {
@@ -71,20 +61,5 @@ namespace FreshMarketApi.Controllers
         {
             _productService.DeleteProduct(id);
         }
-        private PaginationMetaData GetPaginationMetaData(PaginatedList<ProductDto> productDtOs)
-        {
-            return new PaginationMetaData
-            {
-                Totalcount = productDtOs.TotalCount,
-                PageSize = productDtOs.PageSize,
-                CurrentPage = productDtOs.CurrentPage,
-                TotalPages = productDtOs.TotalPage,
-            };
-        }
-    }
-    public class ProductParams
-    {
-        public int Id { get; set; }
-        public int CategoryId { get; set; }
     }
 }

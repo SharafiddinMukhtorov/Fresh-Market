@@ -1,8 +1,6 @@
 ﻿using FreshMarket.Domain.DTOs.SupplyItem;
 using FreshMarket.Domain.Interfaces.Services;
-using FreshMarket.Domain.Pagination;
 using FreshMarket.Domain.ResourceParameters;
-using FreshMarket.Pagination.PaginatedList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -24,10 +22,6 @@ namespace FreshMarket.Controllers
         public ActionResult<IEnumerable<SupplyItemDto>> Get([FromQuery] SupplyItemResourceParameters supplyItemResourceParameters)
         {
             var supplyItems = _supplyItemService.GetSupplyItems(supplyItemResourceParameters);
-
-            var metaData = GetPaginationMetaData(supplyItems);
-
-            Response.Headers.Append("X-Pagination", JsonSerializer.Serialize(metaData));
 
             return Ok(supplyItems);
         }
@@ -62,16 +56,6 @@ namespace FreshMarket.Controllers
             _supplyItemService.DeleteSupplyItem(id);
 
             return NoContent();
-        }
-        private PaginationMetaData GetPaginationMetaData(PaginatedList<SupplyItemDto> supplyItemDtOs)
-        {
-            return new PaginationMetaData
-            {
-                Totalcount = supplyItemDtOs.TotalCount,
-                PageSize = supplyItemDtOs.PageSize,
-                CurrentPage = supplyItemDtOs.CurrentPage,
-                TotalPages = supplyItemDtOs.TotalPage,
-            };
         }
     }
 }
